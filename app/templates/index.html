@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+{% block app_content%}
+    <h1>Hi,{{ current_user.username }}</h1>
+
+{#    <form action="" method="POST">#}
+{#    {{ form.hidden_tag() }}#}
+{#    <p>#}
+{#        {{ form.posts.label }}<br>#}
+{#        {{ form.posts(cols= 32,rows = 4) }}<br>#}
+{#        {% for error in form.posts.errors %}#}
+{#            <span style="color:red;">[{{ error }}]</span>#}
+{#        {% endfor %}#}
+{#    </p>#}
+{#        <p>{{ form.submit() }}</p>#}
+{#    </form>#}
+    {% if form %}
+        {{ wtf.quick_form(form) }}
+        <br>
+    {% endif %}
+    {% for post in posts %}
+        {% include '_post.html' %}
+    {% endfor %}
+
+    <nav aria-label="...">
+
+    <li class = "previous{% if prev_url %}disabled{% endif %}">
+        <a href="{{ prev_url }}">
+            <span aria-hidden="true">&larr;</span>Newer Posts
+        </a>
+    </li>
+
+    <li class = "next{% if next_url %}disabled{% endif %}">
+        <a href="{{ next_url }}">
+            Older Posts<span aria-hidden="true">&rarr;</span>
+        </a>
+    </li>
+</nav>
+{% endblock %}

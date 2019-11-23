@@ -1,0 +1,30 @@
+<table class = "table">
+    <tr>
+        <td><img src="" alt=""></td>
+        <td>
+            <p><a href="{{ usrl_for("user",username = username) }}">
+                    {{ user.username }}
+                </a>
+            </p>
+            <small>
+                {% if user.about_me %}
+                    <p>{{ user.about.me }}</p>
+                {% endif %}
+                {% if last_seen %}
+                    <p>{{  _('Last seen says')}}:{{ moment(user.last_seen).format("LLL") }}</p>
+                {% endif %}
+                {% if user != current_user %}
+                    {% if not current_user.is_following(user) %}
+                        <a href="{{ url_for("follow",username = user.username) }}">{{ _('follow') }}</a>
+                    {% else %}
+                        <a href="{{ url_for("unfollow",username = user.username) }}">{{ _('unfollow') }}</a>
+                        {% endif %}
+                {% endif %}
+            </small>
+
+
+
+
+        </td>
+    </tr>
+</table>
